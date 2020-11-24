@@ -1,7 +1,45 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/node-apis/
- */
 
-// You can delete this file if you're not using it
+exports.createPages= async({actions,graphql,reporter})=>{
+
+  const res=await graphql(`
+      query{
+        allDatoCmsHabitacion{
+          nodes{
+            slug
+          }
+        }
+      }
+  `)
+
+  if(res.erros){
+    reporter.panic('Sin resultados',res.errors);
+  }
+
+  const habitaciones=res.data.allDatoCmsHabitacion.nodes;
+  habitaciones.forEach(hab => {
+      actions.createPage(
+        {
+          path:hab.slug,
+          component:require.resolve('./src/components/habitacion.js'),
+          context:{
+            slug:hab.slug
+          }
+        }
+      )
+  });
+
+}
+
+
+
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
+    if (stage.startsWith("develop")) {
+      actions.setWebpackConfig({
+        resolve: {
+          alias: {
+            "react-dom": "@hot-loader/react-dom",
+          },
+        },
+      })
+    }
+  }

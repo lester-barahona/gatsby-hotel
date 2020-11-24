@@ -1,0 +1,52 @@
+.img-principal{
+    height: 450px;
+   
+}
+.img-principal>div{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to top,rgba(34,49,63,.75),rgba(34,49,63,.75));
+    text-align: center;
+}
+
+.inicio-secimg{
+    margin: 40px 0;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 20px;
+    height: 400px;
+}
+
+
+.inicio-secimg>p{
+    margin-top: 50px;
+}
+
+.card{
+    width: 25%;
+    border: none !important;
+}
+
+.habs-container{
+    margin-top: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;    
+}
+
+@media screen and (max-width: 960px){
+
+    .inicio-secimg{
+        grid-template-columns: 1fr;
+        grid-template-rows:repeat(2,1fr);
+        height: 800px;
+    }
+
+    .inicio-secimg>p{
+        grid-row: 2;
+    }
+
+}
